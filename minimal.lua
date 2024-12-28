@@ -1,3 +1,3 @@
-require("sthompson.settings")
-require("sthompson.remap")
-require("sthompson.autocmds")
+require("rsturm.settings")
+require("rsturm.remap")
+require("rsturm.autocmds")

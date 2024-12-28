@@ -1,45 +1,42 @@
---[[                                 88
-                       ,d      ,d    ""
-                       88      88
-,adPPYba,  ,adPPYba, MM88MMM MM88MMM 88 8b,dPPYba,   ,adPPYb,d8 ,adPPYba,
-I8[    "" a8P_____88   88      88    88 88P'   `"8a a8"    `Y88 I8[    ""
- `"Y8ba,  8PP"""""""   88      88    88 88       88 8b       88  `"Y8ba,
-aa    ]8I "8b,   ,aa   88,     88,   88 88       88 "8a,   ,d88 aa    ]8I
-`"YbbdP"'  `"Ybbd8"'   "Y888   "Y888 88 88       88  `"YbbdP"Y8 `"YbbdP"'
-                                                     aa,    ,88
-                                                      "Y8bbd]]
+-- Line Numbering
+vim.wo.number = true -- enable
+vim.opt.nu = true -- absolute numbering
 
-vim.wo.number = true
-vim.opt.rnu = true
-
+-- Mouse settings
+-- (Maybe someday I'll just disable... Maybe not.)
 vim.o.mouse = 'a'
--- Disable horizontal scrolling.
-vim.o.mousescroll = 'ver:3,hor:0'
-vim.o.clipboard = 'unnamedplus' -- sync clipboards
+vim.o.mousescroll = 'ver:3,hor:3'
 
-vim.o.timeout = true
+-- Sync vim clipboard with system clipboard
+-- see :help clipboard
+vim.o.clipboard = 'unnamedplus'
+
+-- time (ms) to wait from input until saving to temp buffer
 vim.o.updatetime = 300
+
+-- timeout on key sequences
+vim.o.timeout = true
 vim.o.timeoutlen = 500
-vim.o.ttimeoutlen = 10
+vim.o.ttimeoutlen = 200
 
-vim.opt.tabstop = 4
+-- Tabs/indenting
+vim.opt.tabstop = 4 -- number of spaces to SHOW when an actual tab is present
 vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.expandtab = true
-vim.opt.autoindent = true
+vim.opt.shiftwidth = 4 -- reinterpret tab as this many spaces
+vim.opt.expandtab = true -- use 1-<shiftwidth> spaces appropriately to get to next indentation
+vim.opt.autoindent = true -- maintain indentation from line to line
+vim.opt.smartindent = true -- assume indentation of new line in code
 
-vim.opt.splitbelow = true
-vim.opt.splitright = true
-
+-- Search settings
+-- ignore case unless a capital is in the query
 vim.opt.smartcase = true
 vim.opt.ignorecase = true
 
-vim.opt.smartindent = true
-
+vim.opt.textwidth = 100
 vim.opt.wrap = false
 vim.opt.showbreak = '│ ' --┊│▕
-vim.opt.scrolloff = 10
-vim.opt.sidescrolloff = 36 -- set to 999 for "always centered"
+vim.opt.scrolloff = 5
+vim.opt.sidescrolloff = 36
 -- vim.opt.sidescroll = 0
 
 vim.opt.linebreak = true
