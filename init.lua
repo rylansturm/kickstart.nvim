@@ -120,8 +120,9 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+-- Added by me! (Rylan)
 vim.api.nvim_create_autocmd('FileType', {
-  pattern = { 'cpp', 'c', 'h', 'hpp', 'py', 'rs' },
+  pattern = { 'cpp', 'c', 'h', 'hpp', 'py', 'rs', 'html', 'javascript' },
   callback = function()
     vim.opt_local.expandtab = true
     vim.opt_local.shiftwidth = 4
@@ -129,6 +130,19 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.opt_local.softtabstop = 4
   end,
 })
+
+vim.api.nvim_create_autocmd('BufReadPost', {
+  callback = function()
+    local mark = vim.api.nvim_buf_get_mark(0, '"')
+    local lcount = vim.api.nvim_buf_line_count(0)
+    if mark[1] > 0 and mark[1] <= lcount then
+      pcall(vim.api.nvim_win_set_cursor, 0, mark)
+    end
+  end,
+})
+
+vim.keymap.set({ 'n', 'v' }, '<leader>y', '"+y', { desc = '[Y]ank to clipboard' })
+vim.keymap.set({ 'n', 'v' }, '<leader>p', '"+p', { desc = '[P]aste from clipboard' })
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
@@ -614,7 +628,10 @@ require('lazy').setup({
         -- Disable "format_on_save lsp_fallback" for languages that don't
         -- have a well standardized coding style. You can add additional
         -- languages here or re-enable it for the disabled ones.
-        local disable_filetypes = { c = true, cpp = true }
+        local disable_filetypes = {
+          c = true,
+          cpp = true,
+        }
         local lsp_format_opt
         if disable_filetypes[vim.bo[bufnr].filetype] then
           lsp_format_opt = 'never'
@@ -632,7 +649,8 @@ require('lazy').setup({
         -- python = { "isort", "black" },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
-        -- javascript = { "prettierd", "prettier", stop_after_first = true },
+        html = { 'prettierd', 'prettier', stop_after_first = true },
+        javascript = { 'prettierd', 'prettier', stop_after_first = true },
       },
     },
   },
